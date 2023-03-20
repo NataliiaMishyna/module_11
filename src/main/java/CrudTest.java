@@ -1,5 +1,6 @@
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.testng.AssertJUnit.*;
 
@@ -62,6 +63,9 @@ public class CrudTest {
         System.out.println(getTicket);
 
         ticketCrudService.deleteTicket(1L);
+
+        List<Ticket> tickets= ticketCrudService.findAll();
+        tickets.forEach(ticket1 -> System.out.println(ticket1));
     }
 
     public static void main(String[] args) throws Exception {

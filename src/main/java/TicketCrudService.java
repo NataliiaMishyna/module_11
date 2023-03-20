@@ -4,6 +4,7 @@ import org.hibernate.Transaction;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TicketCrudService {
     private final SessionFactory sessionFactory;
@@ -51,4 +52,12 @@ public class TicketCrudService {
         }
     }
 
+    public List<Ticket> findAll(){
+        List<Ticket> tickets;
+        try(Session session = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+            tickets = (List<Ticket>) sessionFactory.openSession().createQuery("From Ticket").list();
+        }
+        return tickets;
+    }
 }
