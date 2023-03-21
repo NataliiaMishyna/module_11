@@ -1,6 +1,8 @@
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "planet")
 @Data
@@ -11,6 +13,12 @@ public class Planet {
 
     @Column(name = "name", length = 500, nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "toPlanet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> ticketsTo;
+
+    @OneToMany(mappedBy = "fromPlanet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> ticketFrom;
 
     public String getId() {
         return id;

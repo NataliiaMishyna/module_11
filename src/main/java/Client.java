@@ -1,6 +1,8 @@
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Entity
 @Table(name="client")
@@ -13,6 +15,9 @@ public class Client {
 
     @Column(name = "name", nullable = false, length = 200)
     private String name;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets;
 
     @Override
     public String toString() {
